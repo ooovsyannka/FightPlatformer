@@ -49,8 +49,11 @@ public class EnemyMover : MonoBehaviour
     public void StopMove()
     {
         EnemyState = State.Die;
-        StopCoroutine(_moveToCoroutine);
-        StopCoroutine(_changeTargetCoroutine);
+        if (_moveToCoroutine != null)
+            StopCoroutine(_moveToCoroutine);
+
+        if (_changeTargetCoroutine != null)
+            StopCoroutine(_changeTargetCoroutine);
     }
 
     public void SetTarget(Vector2 target)
@@ -98,7 +101,7 @@ public class EnemyMover : MonoBehaviour
         IsMove = true;
         EnemyState = State.Move;
 
-        while (Vector2.Distance(transform.position, _target) > _currentDistance)
+        while (transform.position.IsEnoughClose( _target,_currentDistance) == false)
         {
             Move();
 

@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(PlayerMover), typeof(Health), typeof(Ammunition))]
+[RequireComponent(typeof(PlayerMover), typeof(PlayerHealth), typeof(PlayerAmmunition))]
 
 public class Player : MonoBehaviour
 {
@@ -18,14 +18,14 @@ public class Player : MonoBehaviour
     private State _state;
     private Coroutine _respawnDelayCoroutine;
     private PlayerMover _playerMover;
-    private Health _playerHealth;
-    private Ammunition _playerAmmunition;
+    private PlayerHealth _playerHealth;
+    private PlayerAmmunition _playerAmmunition;
     private CapsuleCollider2D _collider;
 
     private void Awake()
     {
-        _playerHealth = GetComponent<Health>();
-        _playerAmmunition = GetComponent<Ammunition>();
+        _playerHealth = GetComponent<PlayerHealth>();
+        _playerAmmunition = GetComponent<PlayerAmmunition>();
         _playerMover = GetComponent<PlayerMover>();
         _collider = GetComponent<CapsuleCollider2D>();
         transform.position = _startPosition.position;

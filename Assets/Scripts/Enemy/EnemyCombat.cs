@@ -7,7 +7,7 @@ public class EnemyCombat : MonoBehaviour
     [SerializeField] private Weapon _weapon;
     [SerializeField] private WeaponRender _weaponRender;
 
-    private int _distanceToAttack = 20;
+    private int _distanceToAttack = 24;
 
     public bool IsCombat { get; private set; }
 
@@ -33,7 +33,7 @@ public class EnemyCombat : MonoBehaviour
 
     public void TryAttackPlayer()
     {
-        if (Vector2.Distance(transform.position, Player.transform.position) < _distanceToAttack)
+        if (transform.position.IsEnoughClose(Player.transform.position, _distanceToAttack))
             _weapon.TryShoot();
 
         LookAtTarget();

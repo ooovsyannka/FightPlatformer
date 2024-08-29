@@ -436,7 +436,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _reloadDelayTime: 2
   _shootDelayTime: 1
-  _ammunition: {fileID: 4062221180511043011}
+  _ammunition: {fileID: 9085318134422631716}
   _weaponAnimation: {fileID: 4570047664484917525}
   _weaponSounds: {fileID: 1309732678327796631}
 --- !u!1 &7207719787036624205
@@ -498,8 +498,8 @@ GameObject:
   - component: {fileID: 7801197424751386293}
   - component: {fileID: 3612729672780293984}
   - component: {fileID: 8718013987782305812}
-  - component: {fileID: 1862145943256915024}
-  - component: {fileID: 4062221180511043011}
+  - component: {fileID: 7233981388644641169}
+  - component: {fileID: 9085318134422631716}
   m_Layer: 0
   m_Name: Enemy
   m_TagString: Untagged
@@ -619,7 +619,7 @@ MonoBehaviour:
   _idleTime: 1.5
   _speedMove: 3
   _distanceToPlayer: 15
---- !u!114 &1862145943256915024
+--- !u!114 &7233981388644641169
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -628,12 +628,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 8115338539323468660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ae66e07e0717fa54fae58927deb5c5b0, type: 3}
+  m_Script: {fileID: 11500000, guid: 3dafc93534894be44892574fb48f38b5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHealth: 3
   _characterRenderer: {fileID: 2084888461539217235}
---- !u!114 &4062221180511043011
+--- !u!114 &9085318134422631716
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -642,7 +642,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 8115338539323468660}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b0c406e3be2213840bad9459d15efa95, type: 3}
+  m_Script: {fileID: 11500000, guid: 65deffc4881171c49996434289e6c1c7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxAllCountBullets: 70

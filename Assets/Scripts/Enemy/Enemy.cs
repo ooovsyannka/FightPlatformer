@@ -1,7 +1,7 @@
 ﻿using System.Collections;
 using UnityEngine;
 
-[RequireComponent(typeof(EnemyMover), typeof(Health))]
+[RequireComponent(typeof(EnemyMover), typeof(EnemyHealth))]
 
 public class Enemy : MonoBehaviour
 {
@@ -13,14 +13,15 @@ public class Enemy : MonoBehaviour
     private float _timeDieDelay = 1.5f;
     private bool _isDie = false;
     private EnemyMover _enemyMover;
-    private Health _enemyHealth;
+    private EnemyHealth _enemyHealth;
     private Loot _loot;
     private CapsuleCollider2D _enemyCollider;
+    private EnemyPool _enemyPool;
 
     private void Awake()
     {
         _enemyMover = GetComponent<EnemyMover>();
-        _enemyHealth = GetComponent<Health>();
+        _enemyHealth = GetComponent<EnemyHealth>();
         _enemyCollider = transform.GetComponent<CapsuleCollider2D>();
     }
 
@@ -28,7 +29,6 @@ public class Enemy : MonoBehaviour
     {
         _isDie = false;
         _enemyHealth.Died += Die;
-        transform.SetParent(null);
         _enemyCollider.enabled = true;
     }
 
@@ -59,6 +59,11 @@ public class Enemy : MonoBehaviour
 
     public void GetLoot(Loot loot) => _loot = loot;
 
+    public void GetEnemyPool(EnemyPool enemyPool)
+    {
+        _enemyPool = enemyPool;
+    }
+
     private void Die()
     {
         if (_isDie == false)
@@ -73,8 +78,10 @@ public class Enemy : MonoBehaviour
     {
         _enemyMover.StopMove();
         transform.GetComponent<CapsuleCollider2D>().enabled = false;
+
         yield return new WaitForSeconds(_timeDieDelay);
 
+        _enemyPool.ReturnEnemyInPool(this);
         DropLoot();
         gameObject.SetActive(false);
     }
@@ -84,10 +91,8 @@ public class Enemy : MonoBehaviour
         if (_loot == null)
             return;
 
-        int distanceToDrop = 3;
-        print("drop");
         _loot.gameObject.SetActive(true);
-        _loot.transform.position = new Vector2(transform.position.x + distanceToDrop, transform.position.y);
+        _loot.transform.position = transform.position;
         _loot = null;
     }
 }

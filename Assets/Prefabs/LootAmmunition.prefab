@@ -143,3 +143,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9ead7f2e870da8444af13d4124f0c193, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _maxAmunitionCount: 15

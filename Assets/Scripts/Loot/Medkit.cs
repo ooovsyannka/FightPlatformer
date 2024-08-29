@@ -1,16 +1,15 @@
 ﻿using UnityEngine;
 
+[RequireComponent(typeof(BoxCollider2D))]
+
 public class Medkit : Loot
 {
-    private int _countToRegeneration = 3;
+    [SerializeField] private int _maxCountToRecovery = 4;
 
-    private void OnTriggerEnter2D(Collider2D collision)
+    public override TypeLoot GetTypeLoot()
     {
-        if (collision.TryGetComponent(out Player player))
-        {
-            player.GetComponent<Health>().Regeneration(_countToRegeneration);
-
-            gameObject.SetActive(false);
-        }
+        return TypeLoot.Medkit;
     }
+
+    public int CountToRecovery { get { return _maxCountToRecovery; } }
 }

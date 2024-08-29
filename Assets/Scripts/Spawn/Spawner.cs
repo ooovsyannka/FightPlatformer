@@ -5,7 +5,8 @@ using UnityEngine;
 
 public class Spawner : MonoBehaviour
 {
-    [SerializeField] private ObjectPooler _objectPooler;
+    [SerializeField] private EnemyPool _objectPooler;
+    [SerializeField] private LootPool _lootPooler;
     [SerializeField] private float _spawnDelay;
     [SerializeField] private List<Transform> _spawnerPositions;
 
@@ -60,7 +61,7 @@ public class Spawner : MonoBehaviour
     {
         Loot desiredLoot;
         int randomTypeLoot = UnityEngine.Random.Range(0, Enum.GetValues(typeof(TypeLoot)).Length);
-        _objectPooler.TryGetDesiredLoot(out desiredLoot, (TypeLoot)randomTypeLoot);
+        _lootPooler.TryGetDesiredLoot(out desiredLoot, (TypeLoot)randomTypeLoot);
 
         return desiredLoot;
     }

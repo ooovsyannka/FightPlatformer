@@ -5,7 +5,7 @@ public class PlayerInfo : MonoBehaviour
 {
     [SerializeField] private TextMeshProUGUI _healthText;
     [SerializeField] private TextMeshProUGUI _ammunitionText;
-    [SerializeField] private Health _playerHealth;
+    [SerializeField] private PlayerHealth _playerHealth;
     [SerializeField] private Ammunition _ammunition;
 
     private void Update()

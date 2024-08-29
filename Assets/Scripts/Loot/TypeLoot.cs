@@ -1,5 +1,5 @@
 ﻿public enum TypeLoot
 {
-    LootAmmunition = 0,
-    MedicineKit = 1
+    AmmunitionLoot = 0,
+    Medkit = 1
 }

@@ -1,14 +1,15 @@
-﻿public class AmmunitionLoot : Loot
+﻿using UnityEngine;
+
+[RequireComponent(typeof(BoxCollider2D))]
+
+public class AmmunitionLoot : Loot
 {
-    private int _maxCountAmmunitionToRecovory = 15;
+    [SerializeField] private int _maxAmunitionCount = 15;
 
-    private void OnTriggerEnter2D(UnityEngine.Collider2D collision)
+    public int AmunitionCount { get {  return _maxAmunitionCount; } }
+
+    public override TypeLoot GetTypeLoot()
     {
-        if (collision.TryGetComponent(out Player player))
-        {
-            player.GetComponent<Ammunition>().ReplenishmentBulletsCount(_maxCountAmmunitionToRecovory);
-
-            gameObject.SetActive(false);
-        }
+        return TypeLoot.AmmunitionLoot;
     }
 }

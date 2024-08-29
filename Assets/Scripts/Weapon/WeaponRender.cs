@@ -17,7 +17,9 @@ public class WeaponRender : MonoBehaviour
             _weaponSprite.flipX = true;
         }
         else
+        {
             _weaponSprite.flipX = false;
+        }
     }
 
     public void GetCurrentAngle(float currentAngle)
