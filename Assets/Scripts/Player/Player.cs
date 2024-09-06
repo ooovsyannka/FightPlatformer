@@ -43,7 +43,7 @@ public class Player : MonoBehaviour
         {
             if (_inputReader.IsShoot)
             {
-                _playerCombat.Attack();
+                //_playerCombat.Attack();
             }
 
             if (_inputReader.IsReload)

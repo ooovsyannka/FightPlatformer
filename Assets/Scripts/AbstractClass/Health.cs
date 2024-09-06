@@ -6,6 +6,7 @@ public abstract class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
     [SerializeField] private CharacterRenderer _characterRenderer;
+    [SerializeField] private HealthRenderer _healthRenderer;
 
     private float _regenerationDelay = 0.5f;
     private Coroutine _regenerationDelayCoroutine;
@@ -13,6 +14,11 @@ public abstract class Health : MonoBehaviour
     public int CurrentHealth { get; private set; }
 
     public event Action Died;
+
+    private void Awake ()
+    {
+        _healthRenderer.GetMaxHealth(_maxHealth);
+    }
 
     private void OnEnable()
     {
@@ -22,6 +28,8 @@ public abstract class Health : MonoBehaviour
     public void Recovery()
     {
         CurrentHealth = _maxHealth;
+
+        _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
     }
 
     public void TakeDamage(int damage)
@@ -31,6 +39,8 @@ public abstract class Health : MonoBehaviour
 
         CurrentHealth = Math.Clamp(CurrentHealth - damage, 0, _maxHealth);
         _characterRenderer.TakeDamageColor();
+
+        _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
 
         if (CurrentHealth == 0)
         {
@@ -54,6 +64,7 @@ public abstract class Health : MonoBehaviour
             {
                 CurrentHealth++;
                 _characterRenderer.RegenerationColor();
+                _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
             }
             else
             {
