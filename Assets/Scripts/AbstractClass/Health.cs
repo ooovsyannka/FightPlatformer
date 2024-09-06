@@ -1,12 +1,13 @@
 ﻿using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public abstract class Health : MonoBehaviour
 {
     [SerializeField] private int _maxHealth;
     [SerializeField] private CharacterRenderer _characterRenderer;
-    [SerializeField] private HealthRenderer _healthRenderer;
+    [SerializeField] private List<HealthRenderer> _healthRenderer;
 
     private float _regenerationDelay = 0.5f;
     private Coroutine _regenerationDelayCoroutine;
@@ -15,9 +16,12 @@ public abstract class Health : MonoBehaviour
 
     public event Action Died;
 
-    private void Awake ()
+    private void Awake()
     {
-        _healthRenderer.GetMaxHealth(_maxHealth);
+        foreach (HealthRenderer healthRenderer in _healthRenderer)
+        {
+            healthRenderer.GetMaxHealth(_maxHealth);
+        }
     }
 
     private void OnEnable()
@@ -29,7 +33,7 @@ public abstract class Health : MonoBehaviour
     {
         CurrentHealth = _maxHealth;
 
-        _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
+        ChangeHealthInfoInList();
     }
 
     public void TakeDamage(int damage)
@@ -40,7 +44,7 @@ public abstract class Health : MonoBehaviour
         CurrentHealth = Math.Clamp(CurrentHealth - damage, 0, _maxHealth);
         _characterRenderer.TakeDamageColor();
 
-        _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
+        ChangeHealthInfoInList();
 
         if (CurrentHealth == 0)
         {
@@ -64,7 +68,7 @@ public abstract class Health : MonoBehaviour
             {
                 CurrentHealth++;
                 _characterRenderer.RegenerationColor();
-                _healthRenderer.ChangeAllHealthInfo(CurrentHealth);
+                ChangeHealthInfoInList();
             }
             else
             {
@@ -72,6 +76,14 @@ public abstract class Health : MonoBehaviour
             }
 
             yield return new WaitForSeconds(_regenerationDelay);
+        }
+    }
+
+    private void ChangeHealthInfoInList()
+    {
+        foreach (HealthRenderer healthRenderer in _healthRenderer)
+        {
+            healthRenderer.ChangeHealthInfo(CurrentHealth);
         }
     }
 }
