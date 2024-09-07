@@ -14,7 +14,6 @@ public class HealthBarPrecentage : HealthRenderer
 
     public override void ChangeHealthInfo(int currentHealth)
     {
-
         _bar.value = GetHealthPrecentage(currentHealth);
     }
 }
